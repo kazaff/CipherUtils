@@ -13,6 +13,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 
 public class Cipher {
+
     public static KeyPairs generateKeyPair() throws Exception{
         // 创建RSA非对称加密的密钥对
         KeyPair keyPair = RSA.generateKeyPair();
@@ -67,5 +68,18 @@ public class Cipher {
         byte[] result = AES.decrypt(decoder.decodeBuffer(content.getAesPart()), secret);
 
         return new String(result, UTF_8);
+    }
+
+    public static boolean verify(String content, String signature, String pubKey) throws Exception{
+        BASE64Decoder decoder = new BASE64Decoder();
+        return RSA.verify(content.getBytes(UTF_8), decoder.decodeBuffer(signature), RSA.getPublicKey(decoder.decodeBuffer(pubKey)));
+    }
+
+    public static String sign(String content, String privKey) throws Exception{
+        BASE64Encoder encoder = new BASE64Encoder();
+        BASE64Decoder decoder = new BASE64Decoder();
+        return encoder.encode(
+                RSA.sign(content.getBytes(UTF_8), RSA.getPrivateKey(decoder.decodeBuffer(privKey)))
+        );
     }
 }

@@ -26,4 +26,12 @@ public class CipherData {
     public void setRsaPart(String rsa_part) {
         this.rsa_part = rsa_part;
     }
+
+    @Override
+    public String toString() {
+        return "CipherData{" +
+                "aes_part='" + aes_part + '\'' +
+                ", rsa_part='" + rsa_part + '\'' +
+                '}';
+    }
 }

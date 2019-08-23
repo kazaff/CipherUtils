@@ -51,4 +51,19 @@ public class RSA {
         byte[] bytes = cipher.doFinal(content);
         return bytes;
     }
+
+    public static boolean verify(byte[] content, byte[] signature, PublicKey publicKey) throws Exception{
+        Signature publicSignature = Signature.getInstance("SHA256withRSA");
+        publicSignature.initVerify(publicKey);
+        publicSignature.update(content);
+        return publicSignature.verify(signature);
+    }
+
+    public static byte[] sign(byte[] content, PrivateKey privateKey) throws Exception{
+        Signature privateSignature = Signature.getInstance("SHA256withRSA");
+        privateSignature.initSign(privateKey);
+        privateSignature.update(content);
+
+        return privateSignature.sign();
+    }
 }

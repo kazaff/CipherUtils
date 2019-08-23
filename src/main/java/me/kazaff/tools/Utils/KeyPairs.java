@@ -21,4 +21,12 @@ public class KeyPairs {
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
     }
+
+    @Override
+    public String toString() {
+        return "KeyPairs{" +
+                "privateKey='" + privateKey + '\'' +
+                ", publicKey='" + publicKey + '\'' +
+                '}';
+    }
 }
