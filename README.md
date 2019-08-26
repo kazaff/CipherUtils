@@ -19,6 +19,12 @@ import me.kazaff.tools.Utils.CipherData;
 // 创建密钥对
 KeyPairs keyPairs = Cipher.generateKeyPair();
 
+// 获取私钥字符串, 用于交给通信接收方保存
+String privKey = keyPairs.getPrivateKey();
+
+// 获取公钥字符串, 用于交给通信请求方保存
+String privKey = keyPairs.getPublicKey();
+
 // 加密目标字符串
 CipherData result = Cipher.encrypt("目标字符串", keyPairs.getPublicKey());
 System.out.println(result); // aes_part对应对称加密后的base64数据，rsa_part对应非对称加密后的base64数据
@@ -38,6 +44,12 @@ import me.kazaff.tools.Utils.KeyPairs;
 
 // 创建密钥对
 KeyPairs keyPairs = Cipher.generateKeyPair();
+
+// 获取私钥字符串, 用于交给通信请求方保存（注意这里和加解密是相反的，签名需要在请求方完成，所以请求方需要持有私钥）
+String privKey = keyPairs.getPrivateKey();
+
+// 获取公钥字符串, 用于交给通信接收方保存
+String privKey = keyPairs.getPublicKey();
 
 // 签名目标字符串
 String signStr = Cipher.sign("目标字符串", keyPairs.getPrivateKey());
